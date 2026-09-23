@@ -1,7 +1,9 @@
 {
   "textures": {
-    "all": "minecraft:block/oxidized_copper",
-    "particle": "minecraft:block/oxidized_copper"
+    "front": "copper_golem_sorter:block/copper_chest_front_stage_3",
+    "side": "copper_golem_sorter:block/copper_chest_side_stage_3",
+    "top": "copper_golem_sorter:block/copper_chest_top_stage_3",
+    "particle": "copper_golem_sorter:block/copper_chest_side_stage_3"
   },
   "elements": [
     {
@@ -12,34 +14,34 @@
       ],
       "to": [
         15,
-        10,
+        9.5,
         15
       ],
       "faces": {
         "north": {
-          "texture": "#all"
+          "texture": "#front"
         },
         "south": {
-          "texture": "#all"
+          "texture": "#side"
         },
         "east": {
-          "texture": "#all"
+          "texture": "#side"
         },
         "west": {
-          "texture": "#all"
+          "texture": "#side"
         },
         "up": {
-          "texture": "#all"
+          "texture": "#top"
         },
         "down": {
-          "texture": "#all"
+          "texture": "#side"
         }
       }
     },
     {
       "from": [
         1,
-        10,
+        9.5,
         1
       ],
       "to": [
@@ -49,54 +51,54 @@
       ],
       "faces": {
         "north": {
-          "texture": "#all"
+          "texture": "#front"
         },
         "south": {
-          "texture": "#all"
+          "texture": "#side"
         },
         "east": {
-          "texture": "#all"
+          "texture": "#side"
         },
         "west": {
-          "texture": "#all"
+          "texture": "#side"
         },
         "up": {
-          "texture": "#all"
+          "texture": "#top"
         },
         "down": {
-          "texture": "#all"
+          "texture": "#side"
         }
       }
     },
     {
       "from": [
-        7,
-        7,
-        0
+        6.5,
+        6.5,
+        0.25
       ],
       "to": [
-        9,
+        9.5,
         11,
         1
       ],
       "faces": {
         "north": {
-          "texture": "#all"
+          "texture": "#front"
         },
         "south": {
-          "texture": "#all"
+          "texture": "#front"
         },
         "east": {
-          "texture": "#all"
+          "texture": "#side"
         },
         "west": {
-          "texture": "#all"
+          "texture": "#side"
         },
         "up": {
-          "texture": "#all"
+          "texture": "#top"
         },
         "down": {
-          "texture": "#all"
+          "texture": "#side"
         }
       }
     }
