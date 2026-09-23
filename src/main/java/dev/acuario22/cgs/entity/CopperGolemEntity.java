@@ -101,6 +101,7 @@ public final class CopperGolemEntity extends IronGolem {
     public void tick() {
         super.tick();
         if (!level().isClientSide && level() instanceof ServerLevel serverLevel) {
+            if (cooldown > 0) cooldown--;
             tickOxidation(serverLevel);
             tickIronGolemFlower(serverLevel);
         }
@@ -276,17 +277,12 @@ public final class CopperGolemEntity extends IronGolem {
             setFlags(EnumSet.of(Flag.MOVE));
         }
 
-        @Override public boolean canUse() { return true; }
-        @Override public boolean canContinueToUse() { return true; }
+        @Override public boolean canUse() { return cooldown <= 0; }
+        @Override public boolean canContinueToUse() { return cooldown <= 0; }
 
         @Override
         public void tick() {
             if (!(level() instanceof ServerLevel serverLevel)) return;
-
-            if (cooldown > 0) {
-                cooldown--;
-                return;
-            }
 
             switch (taskPhase) {
                 case IDLE -> findSource(serverLevel);
