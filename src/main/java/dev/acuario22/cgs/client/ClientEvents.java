@@ -1,6 +1,7 @@
 package dev.acuario22.cgs.client;
 
 import dev.acuario22.cgs.CopperGolemSorter;
+import dev.acuario22.cgs.client.model.CopperGolemModel;
 import dev.acuario22.cgs.client.render.CopperGolemRenderer;
 import dev.acuario22.cgs.registry.ModEntities;
 import net.minecraftforge.api.distmarker.Dist;
@@ -11,6 +12,11 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = CopperGolemSorter.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ClientEvents {
     private ClientEvents() {}
+
+    @SubscribeEvent
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(CopperGolemModel.LAYER_LOCATION, CopperGolemModel::createBodyLayer);
+    }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {

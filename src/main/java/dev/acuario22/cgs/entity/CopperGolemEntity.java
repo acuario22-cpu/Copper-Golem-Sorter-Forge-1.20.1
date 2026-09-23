@@ -1,10 +1,13 @@
 package dev.acuario22.cgs.entity;
 
 import dev.acuario22.cgs.CgsConfig;
+import dev.acuario22.cgs.block.CopperGolemStatueBlock;
 import dev.acuario22.cgs.block.entity.CopperChestBlockEntity;
+import dev.acuario22.cgs.block.entity.CopperGolemStatueBlockEntity;
 import dev.acuario22.cgs.registry.ModBlocks;
 import dev.acuario22.cgs.util.InventoryAccess;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -15,6 +18,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -41,8 +45,11 @@ public final class CopperGolemEntity extends IronGolem {
             SynchedEntityData.defineId(CopperGolemEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_WAXED =
             SynchedEntityData.defineId(CopperGolemEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_FLOWER =
+            SynchedEntityData.defineId(CopperGolemEntity.class, EntityDataSerializers.BOOLEAN);
 
     private final Map<ResourceLocation, BlockPos> destinationCache = new HashMap<>();
+
     private TaskPhase taskPhase = TaskPhase.IDLE;
     private BlockPos sourcePos;
     private BlockPos destinationPos;
@@ -69,6 +76,7 @@ public final class CopperGolemEntity extends IronGolem {
         super.defineSynchedData();
         entityData.define(DATA_OXIDATION, 0);
         entityData.define(DATA_WAXED, false);
+        entityData.define(DATA_FLOWER, false);
     }
 
     @Override
@@ -76,6 +84,7 @@ public final class CopperGolemEntity extends IronGolem {
         super.addAdditionalSaveData(tag);
         tag.putInt("OxidationStage", getOxidationStage());
         tag.putBoolean("Waxed", isWaxed());
+        tag.putBoolean("Flower", hasFlower());
         tag.putInt("OxidationProgress", oxidationProgress);
     }
 
@@ -84,6 +93,7 @@ public final class CopperGolemEntity extends IronGolem {
         super.readAdditionalSaveData(tag);
         setOxidationStage(tag.getInt("OxidationStage"));
         setWaxed(tag.getBoolean("Waxed"));
+        setFlower(tag.getBoolean("Flower"));
         oxidationProgress = Math.max(0, tag.getInt("OxidationProgress"));
     }
 
@@ -92,38 +102,65 @@ public final class CopperGolemEntity extends IronGolem {
         super.tick();
         if (!level().isClientSide && level() instanceof ServerLevel serverLevel) {
             tickOxidation(serverLevel);
+            tickIronGolemFlower(serverLevel);
         }
     }
 
     private void tickOxidation(ServerLevel level) {
         if (!CgsConfig.ENABLE_OXIDATION.get() || isWaxed() || isRemoved()) return;
-        oxidationProgress++;
-        if (oxidationProgress < CgsConfig.OXIDATION_STAGE_TICKS.get()) return;
 
-        oxidationProgress = 0;
-        int next = getOxidationStage() + 1;
-        if (next >= 3) {
+        if (getOxidationStage() < 3) {
+            oxidationProgress++;
+            if (oxidationProgress >= CgsConfig.OXIDATION_STAGE_TICKS.get()) {
+                setOxidationStage(getOxidationStage() + 1);
+                level.playSound(null, blockPosition(), SoundEvents.COPPER_PLACE,
+                        SoundSource.NEUTRAL, 0.7F, 0.9F + getOxidationStage() * 0.04F);
+            }
+            return;
+        }
+
+        int average = Math.max(1, CgsConfig.STATUE_AVERAGE_TICKS.get());
+        if (getRandom().nextInt(average) == 0) {
             becomeStatue(level);
-        } else {
-            setOxidationStage(next);
-            level.playSound(null, blockPosition(), SoundEvents.COPPER_PLACE,
-                    SoundSource.NEUTRAL, 0.7F, 0.85F + next * 0.08F);
+        }
+    }
+
+    private void tickIronGolemFlower(ServerLevel level) {
+        if (hasFlower() || tickCount % 200 != 0 || getRandom().nextInt(20) != 0) return;
+        List<IronGolem> nearby = level.getEntitiesOfClass(IronGolem.class,
+                getBoundingBox().inflate(4.0D),
+                g -> g != this && !(g instanceof CopperGolemEntity));
+        if (!nearby.isEmpty()) {
+            setFlower(true);
         }
     }
 
     private void becomeStatue(ServerLevel level) {
         dropCarriedStack();
+
         BlockPos pos = blockPosition();
         if (!level.getBlockState(pos).canBeReplaced()) pos = pos.above();
 
         if (level.getBlockState(pos).canBeReplaced()) {
+            CopperGolemStatueBlock.StatuePose[] poses = CopperGolemStatueBlock.StatuePose.values();
+            CopperGolemStatueBlock.StatuePose pose = poses[getRandom().nextInt(poses.length)];
+            Direction facing = Direction.fromYRot(getYRot());
+
             BlockState statue = ModBlocks.COPPER_GOLEM_STATUE.get().defaultBlockState()
-                    .setValue(net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING,
-                            net.minecraft.core.Direction.fromYRot(getYRot()));
+                    .setValue(CopperGolemStatueBlock.FACING, facing)
+                    .setValue(CopperGolemStatueBlock.POSE, pose)
+                    .setValue(CopperGolemStatueBlock.OXIDATION, 3)
+                    .setValue(CopperGolemStatueBlock.WAXED, false);
+
             level.setBlock(pos, statue, 3);
+            if (hasCustomName() && level.getBlockEntity(pos) instanceof CopperGolemStatueBlockEntity statueBe) {
+                statueBe.setCustomName(getCustomName());
+            }
+            level.playSound(null, pos, SoundEvents.COPPER_PLACE, SoundSource.NEUTRAL, 1.0F, 0.75F);
         } else {
             spawnAtLocation(ModBlocks.COPPER_GOLEM_STATUE.get());
         }
+
         discard();
     }
 
@@ -132,7 +169,7 @@ public final class CopperGolemEntity extends IronGolem {
     }
 
     public void setOxidationStage(int stage) {
-        entityData.set(DATA_OXIDATION, Math.max(0, Math.min(2, stage)));
+        entityData.set(DATA_OXIDATION, Math.max(0, Math.min(3, stage)));
         oxidationProgress = 0;
     }
 
@@ -144,9 +181,26 @@ public final class CopperGolemEntity extends IronGolem {
         entityData.set(DATA_WAXED, waxed);
     }
 
+    public boolean hasFlower() {
+        return entityData.get(DATA_FLOWER);
+    }
+
+    public void setFlower(boolean flower) {
+        entityData.set(DATA_FLOWER, flower);
+    }
+
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack held = player.getItemInHand(hand);
+
+        if (held.isEmpty() && !carriedStack().isEmpty()) {
+            if (!level().isClientSide) {
+                dropCarriedStack();
+                level().playSound(null, blockPosition(), SoundEvents.ITEM_PICKUP,
+                        SoundSource.NEUTRAL, 0.8F, 0.8F);
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
 
         if (held.is(Items.HONEYCOMB) && !isWaxed()) {
             if (!level().isClientSide) {
@@ -154,6 +208,17 @@ public final class CopperGolemEntity extends IronGolem {
                 level().playSound(null, blockPosition(), SoundEvents.HONEYCOMB_WAX_ON,
                         SoundSource.NEUTRAL, 1.0F, 1.0F);
                 if (!player.getAbilities().instabuild) held.shrink(1);
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+
+        if (held.is(Items.SHEARS) && hasFlower()) {
+            if (!level().isClientSide) {
+                setFlower(false);
+                spawnAtLocation(Items.POPPY);
+                if (!player.getAbilities().instabuild) {
+                    held.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                }
             }
             return InteractionResult.sidedSuccess(level().isClientSide);
         }
@@ -178,6 +243,14 @@ public final class CopperGolemEntity extends IronGolem {
         }
 
         return super.mobInteract(player, hand);
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
+        super.dropCustomDeathLoot(source, looting, recentlyHit);
+        dropCarriedStack();
+        int count = 1 + getRandom().nextInt(3);
+        spawnAtLocation(new ItemStack(Items.COPPER_INGOT, count));
     }
 
     private ItemStack carriedStack() {
@@ -209,6 +282,7 @@ public final class CopperGolemEntity extends IronGolem {
         @Override
         public void tick() {
             if (!(level() instanceof ServerLevel serverLevel)) return;
+
             if (cooldown > 0) {
                 cooldown--;
                 return;
@@ -231,8 +305,10 @@ public final class CopperGolemEntity extends IronGolem {
             List<BlockEntity> nearby = InventoryAccess.nearbyBlockEntities(level, blockPosition(),
                     CgsConfig.SEARCH_RADIUS.get(), CgsConfig.VERTICAL_SEARCH_RADIUS.get());
 
+            int visited = 0;
             for (BlockEntity be : nearby) {
                 if (!(be instanceof CopperChestBlockEntity chest)) continue;
+                if (++visited > CgsConfig.MAX_CONTAINERS_PER_SEARCH.get()) break;
                 if (InventoryAccess.isLocked(be) || chest.isEmpty()) continue;
 
                 sourcePos = be.getBlockPos();
@@ -243,7 +319,7 @@ public final class CopperGolemEntity extends IronGolem {
                 return;
             }
 
-            cooldown = CgsConfig.IDLE_SCAN_INTERVAL_TICKS.get();
+            cooldown = CgsConfig.FAILED_SEARCH_COOLDOWN_TICKS.get();
         }
 
         private void tickMoveToSource(ServerLevel level) {
@@ -266,6 +342,7 @@ public final class CopperGolemEntity extends IronGolem {
                     resetToIdle();
                     return;
                 }
+
                 setCarriedStack(extracted);
                 getNavigation().stop();
                 taskPhase = TaskPhase.FIND_DESTINATION;
@@ -304,15 +381,13 @@ public final class CopperGolemEntity extends IronGolem {
 
             BlockEntity bestMatching = null;
             BlockEntity bestEmpty = null;
-            int inspected = 0;
+            int visited = 0;
 
             for (BlockEntity be : nearby) {
-                if (inspected >= CgsConfig.MAX_CONTAINERS_PER_SEARCH.get()) break;
                 if (sourcePos != null && be.getBlockPos().equals(sourcePos)) continue;
                 if (InventoryAccess.isCopperInput(be)) continue;
                 if (InventoryAccess.isLocked(be) || !InventoryAccess.isSupported(be)) continue;
-
-                inspected++;
+                if (++visited > CgsConfig.MAX_CONTAINERS_PER_SEARCH.get()) break;
                 if (!InventoryAccess.canAccept(be, carried)) continue;
 
                 if (InventoryAccess.matchingCount(be, carried) > 0) {
@@ -328,7 +403,6 @@ public final class CopperGolemEntity extends IronGolem {
 
             BlockEntity chosen = bestMatching != null ? bestMatching : bestEmpty;
             if (chosen == null) {
-                returnCarriedToSource(level);
                 cooldown = CgsConfig.FAILED_SEARCH_COOLDOWN_TICKS.get();
                 return;
             }
@@ -402,21 +476,6 @@ public final class CopperGolemEntity extends IronGolem {
                 getNavigation().moveTo(destinationPos.getX() + 0.5D, destinationPos.getY(),
                         destinationPos.getZ() + 0.5D, 1.0D);
             }
-        }
-
-        private void returnCarriedToSource(ServerLevel level) {
-            ItemStack carried = carriedStack();
-            if (carried.isEmpty()) {
-                resetToIdle();
-                return;
-            }
-
-            if (sourcePos != null && level.getBlockEntity(sourcePos) instanceof CopperChestBlockEntity source) {
-                setCarriedStack(InventoryAccess.insert(source, carried));
-            }
-
-            if (!carriedStack().isEmpty()) dropCarriedStack();
-            resetToIdle();
         }
 
         private void resetToIdle() {

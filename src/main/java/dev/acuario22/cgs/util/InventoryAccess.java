@@ -23,7 +23,6 @@ public final class InventoryAccess {
             new ResourceLocation("generations_core", "greatball_chest"),
             new ResourceLocation("generations_core", "ultraball_chest"),
             new ResourceLocation("generations_core", "masterball_chest"),
-            // Alias kept for customized/older packs that may expose the singular namespace.
             new ResourceLocation("generation_core", "pokeball_chest"),
             new ResourceLocation("generation_core", "greatball_chest"),
             new ResourceLocation("generation_core", "ultraball_chest"),
@@ -74,8 +73,6 @@ public final class InventoryAccess {
         ResourceLocation id = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getKey(be.getBlockState().getBlock());
         if (id == null) return false;
 
-        // Keep sorting focused on storage chests instead of furnaces, hoppers or machines
-        // that also expose an item handler.
         String path = id.getPath();
         boolean chestLike = path.contains("chest") || isGenerationsChest(be);
         if (!chestLike) return false;
@@ -98,7 +95,7 @@ public final class InventoryAccess {
             int result = 0;
             for (int slot = 0; slot < handler.getSlots(); slot++) {
                 ItemStack stack = handler.getStackInSlot(slot);
-                if (ItemStack.isSameItemSameTags(stack, wanted)) result += stack.getCount();
+                if (!stack.isEmpty() && ItemStack.isSameItem(stack, wanted)) result += stack.getCount();
             }
             return result;
         }
@@ -107,7 +104,7 @@ public final class InventoryAccess {
             int result = 0;
             for (int slot = 0; slot < container.getContainerSize(); slot++) {
                 ItemStack stack = container.getItem(slot);
-                if (ItemStack.isSameItemSameTags(stack, wanted)) result += stack.getCount();
+                if (!stack.isEmpty() && ItemStack.isSameItem(stack, wanted)) result += stack.getCount();
             }
             return result;
         }
@@ -157,12 +154,11 @@ public final class InventoryAccess {
         IItemHandler handler = getHandler(be);
         if (handler != null) {
             ItemStack remainder = input.copy();
-
             for (int pass = 0; pass < 2 && !remainder.isEmpty(); pass++) {
                 for (int slot = 0; slot < handler.getSlots() && !remainder.isEmpty(); slot++) {
                     ItemStack current = handler.getStackInSlot(slot);
-                    boolean matching = !current.isEmpty() && ItemStack.isSameItemSameTags(current, remainder);
-                    if ((pass == 0) != matching) continue;
+                    boolean exactStack = !current.isEmpty() && ItemStack.isSameItemSameTags(current, remainder);
+                    if ((pass == 0) != exactStack) continue;
                     remainder = handler.insertItem(slot, remainder, false);
                 }
             }
