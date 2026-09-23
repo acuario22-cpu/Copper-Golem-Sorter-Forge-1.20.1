@@ -15,7 +15,7 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<CopperGolemEntity>> COPPER_GOLEM =
             ENTITIES.register("copper_golem", () ->
                     EntityType.Builder.<CopperGolemEntity>of(CopperGolemEntity::new, MobCategory.CREATURE)
-                            .sized(0.85F, 1.75F)
+                            .sized(0.75F, 1.45F)
                             .clientTrackingRange(8)
                             .updateInterval(3)
                             .build("copper_golem"));

@@ -2,6 +2,7 @@ package dev.acuario22.cgs.registry;
 
 import dev.acuario22.cgs.CopperGolemSorter;
 import dev.acuario22.cgs.block.entity.CopperChestBlockEntity;
+import dev.acuario22.cgs.block.entity.CopperGolemStatueBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,6 +15,10 @@ public final class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<CopperChestBlockEntity>> COPPER_CHEST =
             BLOCK_ENTITIES.register("copper_chest", () ->
                     BlockEntityType.Builder.of(CopperChestBlockEntity::new, ModBlocks.COPPER_CHEST.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<CopperGolemStatueBlockEntity>> COPPER_GOLEM_STATUE =
+            BLOCK_ENTITIES.register("copper_golem_statue", () ->
+                    BlockEntityType.Builder.of(CopperGolemStatueBlockEntity::new, ModBlocks.COPPER_GOLEM_STATUE.get()).build(null));
 
     private ModBlockEntities() {}
 }

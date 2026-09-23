@@ -17,11 +17,19 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> COPPER_CHEST = BLOCKS.register("copper_chest",
             () -> new CopperChestBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_ORANGE).strength(3.0F, 6.0F).sound(SoundType.COPPER)));
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .randomTicks()
+                    .noOcclusion()));
 
     public static final RegistryObject<Block> COPPER_GOLEM_STATUE = BLOCKS.register("copper_golem_statue",
             () -> new CopperGolemStatueBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_GREEN).strength(3.5F, 6.0F).sound(SoundType.COPPER).noOcclusion()));
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .strength(3.5F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .randomTicks()
+                    .noOcclusion()));
 
     private ModBlocks() {}
 }
