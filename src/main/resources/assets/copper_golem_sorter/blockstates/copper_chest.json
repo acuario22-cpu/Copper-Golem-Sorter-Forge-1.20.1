@@ -1,1 +1,68 @@
-{"variants":{"":{"model":"copper_golem_sorter:block/copper_chest"}}}
+{
+  "variants": {
+    "facing=north,oxidation=0": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_0",
+      "y": 0
+    },
+    "facing=east,oxidation=0": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_0",
+      "y": 90
+    },
+    "facing=south,oxidation=0": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_0",
+      "y": 180
+    },
+    "facing=west,oxidation=0": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_0",
+      "y": 270
+    },
+    "facing=north,oxidation=1": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_1",
+      "y": 0
+    },
+    "facing=east,oxidation=1": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_1",
+      "y": 90
+    },
+    "facing=south,oxidation=1": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_1",
+      "y": 180
+    },
+    "facing=west,oxidation=1": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_1",
+      "y": 270
+    },
+    "facing=north,oxidation=2": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_2",
+      "y": 0
+    },
+    "facing=east,oxidation=2": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_2",
+      "y": 90
+    },
+    "facing=south,oxidation=2": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_2",
+      "y": 180
+    },
+    "facing=west,oxidation=2": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_2",
+      "y": 270
+    },
+    "facing=north,oxidation=3": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_3",
+      "y": 0
+    },
+    "facing=east,oxidation=3": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_3",
+      "y": 90
+    },
+    "facing=south,oxidation=3": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_3",
+      "y": 180
+    },
+    "facing=west,oxidation=3": {
+      "model": "copper_golem_sorter:block/copper_chest_stage_3",
+      "y": 270
+    }
+  }
+}

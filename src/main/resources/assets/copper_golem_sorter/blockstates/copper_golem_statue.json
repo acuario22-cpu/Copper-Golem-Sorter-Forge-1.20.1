@@ -1,8 +1,260 @@
 {
   "variants": {
-    "facing=north":{"model":"copper_golem_sorter:block/copper_golem_statue"},
-    "facing=east":{"model":"copper_golem_sorter:block/copper_golem_statue","y":90},
-    "facing=south":{"model":"copper_golem_sorter:block/copper_golem_statue","y":180},
-    "facing=west":{"model":"copper_golem_sorter:block/copper_golem_statue","y":270}
+    "facing=north,oxidation=0,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_0",
+      "y": 0
+    },
+    "facing=east,oxidation=0,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_0",
+      "y": 90
+    },
+    "facing=south,oxidation=0,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_0",
+      "y": 180
+    },
+    "facing=west,oxidation=0,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_0",
+      "y": 270
+    },
+    "facing=north,oxidation=0,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_0",
+      "y": 0
+    },
+    "facing=east,oxidation=0,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_0",
+      "y": 90
+    },
+    "facing=south,oxidation=0,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_0",
+      "y": 180
+    },
+    "facing=west,oxidation=0,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_0",
+      "y": 270
+    },
+    "facing=north,oxidation=0,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_0",
+      "y": 0
+    },
+    "facing=east,oxidation=0,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_0",
+      "y": 90
+    },
+    "facing=south,oxidation=0,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_0",
+      "y": 180
+    },
+    "facing=west,oxidation=0,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_0",
+      "y": 270
+    },
+    "facing=north,oxidation=0,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_0",
+      "y": 0
+    },
+    "facing=east,oxidation=0,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_0",
+      "y": 90
+    },
+    "facing=south,oxidation=0,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_0",
+      "y": 180
+    },
+    "facing=west,oxidation=0,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_0",
+      "y": 270
+    },
+    "facing=north,oxidation=1,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_1",
+      "y": 0
+    },
+    "facing=east,oxidation=1,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_1",
+      "y": 90
+    },
+    "facing=south,oxidation=1,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_1",
+      "y": 180
+    },
+    "facing=west,oxidation=1,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_1",
+      "y": 270
+    },
+    "facing=north,oxidation=1,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_1",
+      "y": 0
+    },
+    "facing=east,oxidation=1,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_1",
+      "y": 90
+    },
+    "facing=south,oxidation=1,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_1",
+      "y": 180
+    },
+    "facing=west,oxidation=1,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_1",
+      "y": 270
+    },
+    "facing=north,oxidation=1,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_1",
+      "y": 0
+    },
+    "facing=east,oxidation=1,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_1",
+      "y": 90
+    },
+    "facing=south,oxidation=1,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_1",
+      "y": 180
+    },
+    "facing=west,oxidation=1,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_1",
+      "y": 270
+    },
+    "facing=north,oxidation=1,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_1",
+      "y": 0
+    },
+    "facing=east,oxidation=1,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_1",
+      "y": 90
+    },
+    "facing=south,oxidation=1,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_1",
+      "y": 180
+    },
+    "facing=west,oxidation=1,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_1",
+      "y": 270
+    },
+    "facing=north,oxidation=2,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_2",
+      "y": 0
+    },
+    "facing=east,oxidation=2,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_2",
+      "y": 90
+    },
+    "facing=south,oxidation=2,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_2",
+      "y": 180
+    },
+    "facing=west,oxidation=2,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_2",
+      "y": 270
+    },
+    "facing=north,oxidation=2,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_2",
+      "y": 0
+    },
+    "facing=east,oxidation=2,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_2",
+      "y": 90
+    },
+    "facing=south,oxidation=2,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_2",
+      "y": 180
+    },
+    "facing=west,oxidation=2,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_2",
+      "y": 270
+    },
+    "facing=north,oxidation=2,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_2",
+      "y": 0
+    },
+    "facing=east,oxidation=2,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_2",
+      "y": 90
+    },
+    "facing=south,oxidation=2,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_2",
+      "y": 180
+    },
+    "facing=west,oxidation=2,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_2",
+      "y": 270
+    },
+    "facing=north,oxidation=2,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_2",
+      "y": 0
+    },
+    "facing=east,oxidation=2,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_2",
+      "y": 90
+    },
+    "facing=south,oxidation=2,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_2",
+      "y": 180
+    },
+    "facing=west,oxidation=2,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_2",
+      "y": 270
+    },
+    "facing=north,oxidation=3,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_3",
+      "y": 0
+    },
+    "facing=east,oxidation=3,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_3",
+      "y": 90
+    },
+    "facing=south,oxidation=3,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_3",
+      "y": 180
+    },
+    "facing=west,oxidation=3,pose=standing": {
+      "model": "copper_golem_sorter:block/statue_standing_stage_3",
+      "y": 270
+    },
+    "facing=north,oxidation=3,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_3",
+      "y": 0
+    },
+    "facing=east,oxidation=3,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_3",
+      "y": 90
+    },
+    "facing=south,oxidation=3,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_3",
+      "y": 180
+    },
+    "facing=west,oxidation=3,pose=sitting": {
+      "model": "copper_golem_sorter:block/statue_sitting_stage_3",
+      "y": 270
+    },
+    "facing=north,oxidation=3,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_3",
+      "y": 0
+    },
+    "facing=east,oxidation=3,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_3",
+      "y": 90
+    },
+    "facing=south,oxidation=3,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_3",
+      "y": 180
+    },
+    "facing=west,oxidation=3,pose=running": {
+      "model": "copper_golem_sorter:block/statue_running_stage_3",
+      "y": 270
+    },
+    "facing=north,oxidation=3,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_3",
+      "y": 0
+    },
+    "facing=east,oxidation=3,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_3",
+      "y": 90
+    },
+    "facing=south,oxidation=3,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_3",
+      "y": 180
+    },
+    "facing=west,oxidation=3,pose=star": {
+      "model": "copper_golem_sorter:block/statue_star_stage_3",
+      "y": 270
+    }
   }
 }

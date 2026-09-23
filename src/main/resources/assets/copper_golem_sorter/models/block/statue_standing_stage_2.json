@@ -1,0 +1,7 @@
+{
+  "parent": "copper_golem_sorter:block/statue_standing_base",
+  "textures": {
+    "all": "minecraft:block/weathered_copper",
+    "particle": "minecraft:block/weathered_copper"
+  }
+}

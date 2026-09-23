@@ -1,1 +1,3 @@
-{"parent":"copper_golem_sorter:block/copper_chest"}
+{
+  "parent": "copper_golem_sorter:block/copper_chest_stage_0"
+}

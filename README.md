@@ -1,38 +1,49 @@
 # Copper Golem Sorter — Forge 1.20.1
 
-Copper Golem Sorter añade un Copper Golem enfocado en organización automática de almacenes para Minecraft Forge 1.20.1.
+Backport inspirado en el Copper Golem moderno, adaptado a Minecraft Forge 1.20.1 y ampliado para cofres modded.
 
-## Funcionamiento
+## v1.1.0
 
-- Un **Copper Chest** funciona como cofre de entrada.
-- El Copper Golem recoge hasta **16 objetos por viaje**.
-- Primero busca un cofre que **ya contenga exactamente el mismo objeto**.
-- Si no existe uno, puede utilizar un **cofre completamente vacío** como nuevo destino.
-- Nunca descarga objetos en otro Copper Chest.
-- **Shift + clic derecho + Copper Ingot** bloquea/desbloquea cualquier contenedor compatible.
-- La búsqueda revisa block entities de **chunks ya cargados**: no fuerza generación de chunks.
+- Modelo propio de Copper Golem, ya no reutiliza el Iron Golem.
+- 4 apariencias de oxidación: cobre, expuesto, desgastado y oxidado.
+- Se crea con Carved Pumpkin o Jack o'Lantern sobre un bloque de cobre.
+- Al invocarlo, el bloque de cobre se transforma en un Copper Chest.
+- El Copper Chest tiene 4 etapas de oxidación y se puede encerar/raspar.
+- El golem solo toma objetos desde Copper Chests.
+- Lleva hasta 16 objetos.
+- Radio por defecto: 32 bloques horizontal / 8 vertical.
+- Revisa como máximo 10 cofres por ciclo.
+- Si no encuentra destino espera 7 segundos y vuelve a intentar conservando el objeto.
+- Ordena por tipo de item, incluso si nombre/durabilidad/NBT no coinciden.
+- Mano vacía sobre el golem: suelta el objeto que lleva.
+- Honeycomb: encera al golem.
+- Hacha: quita cera o una capa de oxidación.
+- Al oxidarse completamente puede convertirse en estatua.
+- La estatua conserva el nombre del golem.
+- 4 poses de estatua: standing, sitting, running y star.
+- Señal de comparador: 1, 2, 3 y 4 respectivamente.
+- Las estatuas también se oxidan y se pueden encerar/raspar.
+- Una estatua sin oxidación vuelve a ser golem al usar un hacha.
+- Iron Golems cercanos pueden colocar una flor decorativa.
+- Tijeras retiran la flor.
+- Al morir suelta 1–3 lingotes de cobre, además del objeto transportado.
 
-## Compatibilidad
+## Destinos compatibles
 
-El sistema usa Forge Item Handler y, como respaldo, la interfaz vanilla Container. Por eso funciona de forma genérica con cofres modded, incluyendo Iron Chests y las variantes personalizadas que expongan inventario.
+Además de cofres vanilla/trapped chest, se aceptan cofres modded que expongan inventario estándar.
 
-Los cuatro cofres de Generations Core están reconocidos explícitamente:
+Compatibilidad contemplada con Iron Chests y los 4 cofres de Generations Core:
 
 - `generations_core:pokeball_chest`
 - `generations_core:greatball_chest`
 - `generations_core:ultraball_chest`
 - `generations_core:masterball_chest`
 
-Generations Core e Iron Chests son opcionales: no son dependencias obligatorias.
+También se reconoce el alias `generation_core` para packs personalizados.
 
-## Creación y oxidación
+## Bloquear un cofre
 
-Coloca una **Carved Pumpkin** encima de un bloque de cobre para crear el golem. Las variantes de cobre expuesto, weathered, oxidized y enceradas también se reconocen.
-
-- Honeycomb: encera al golem y detiene la oxidación.
-- Hacha: quita la cera o retrocede una etapa.
-- Al oxidarse completamente se convierte en **Copper Golem Statue**, sin IA ni coste de tick.
-- Usa un hacha sobre la estatua para reactivarlo en la etapa Weathered.
+Shift + clic derecho con un lingote de cobre alterna si el golem puede utilizar ese contenedor.
 
 ## Diagnóstico
 
@@ -40,16 +51,8 @@ Coloca una **Carved Pumpkin** encima de un bloque de cobre para crear el golem. 
 /cgs scan
 ```
 
-Informa cuántos contenedores compatibles, Copper Chests, cofres Generations Core y contenedores bloqueados hay cerca.
-
-## Configuración
-
-El archivo common config permite ajustar radio horizontal/vertical, máximo de contenedores inspeccionados, objetos por viaje, intervalos de búsqueda, timeout de pathfinding y velocidad de oxidación.
-
 ## Build
 
 - Minecraft 1.20.1
 - Forge 47.4.22
 - Java 17
-
-GitHub Actions genera automáticamente el JAR en cada push a `main`.

@@ -1,0 +1,7 @@
+{
+  "parent": "copper_golem_sorter:block/statue_running_base",
+  "textures": {
+    "all": "minecraft:block/exposed_copper",
+    "particle": "minecraft:block/exposed_copper"
+  }
+}

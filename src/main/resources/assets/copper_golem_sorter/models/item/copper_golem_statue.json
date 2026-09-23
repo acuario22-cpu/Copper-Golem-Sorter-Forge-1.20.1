@@ -1,1 +1,3 @@
-{"parent":"copper_golem_sorter:block/copper_golem_statue"}
+{
+  "parent": "copper_golem_sorter:block/statue_standing_stage_0"
+}

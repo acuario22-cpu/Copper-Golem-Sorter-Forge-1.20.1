@@ -1,0 +1,7 @@
+{
+  "parent": "copper_golem_sorter:block/statue_star_base",
+  "textures": {
+    "all": "minecraft:block/copper_block",
+    "particle": "minecraft:block/copper_block"
+  }
+}
