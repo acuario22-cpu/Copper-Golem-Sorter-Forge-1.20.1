@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="copper_golem_sorter"
+version="${version}"
+displayName="Copper Golem Sorter"
+authors="Luis / ChatGPT"
+description='''Copper Golem optimizado para ordenar cofres vanilla y modded en Forge 1.20.1.'''
+
+[[dependencies.copper_golem_sorter]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.22,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.copper_golem_sorter]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
