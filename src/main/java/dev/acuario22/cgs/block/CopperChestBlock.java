@@ -1,5 +1,6 @@
 package dev.acuario22.cgs.block;
 
+import dev.acuario22.cgs.util.CopperWeathering;
 import dev.acuario22.cgs.block.entity.CopperChestBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -82,9 +83,7 @@ public final class CopperChestBlock extends BaseEntityBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!state.getValue(WAXED) && state.getValue(OXIDATION) < 3 && random.nextFloat() < 0.05688889F) {
-            level.setBlock(pos, state.setValue(OXIDATION, state.getValue(OXIDATION) + 1), 3);
-        }
+        CopperWeathering.randomTick(state, level, pos, random, OXIDATION, WAXED);
     }
 
     @Override
