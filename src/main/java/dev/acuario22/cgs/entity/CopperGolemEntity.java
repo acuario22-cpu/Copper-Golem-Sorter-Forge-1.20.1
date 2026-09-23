@@ -24,8 +24,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
@@ -60,12 +62,18 @@ public final class CopperGolemEntity extends IronGolem {
     public CopperGolemEntity(EntityType<? extends CopperGolemEntity> type, Level level) {
         super(type, level);
         setCanPickUpLoot(false);
+        if (getNavigation() instanceof GroundPathNavigation groundNavigation) {
+            groundNavigation.setCanOpenDoors(true);
+        }
     }
 
     @Override
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(1, new SortingGoal());
+        // Allows sorting routes to pass through wooden doors. The goal opens
+        // the door while crossing and closes it again afterward.
+        goalSelector.addGoal(2, new OpenDoorGoal(this, true));
         goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.65D, 0.001F));
         goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
         goalSelector.addGoal(9, new RandomLookAroundGoal(this));

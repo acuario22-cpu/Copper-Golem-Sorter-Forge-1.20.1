@@ -45,9 +45,13 @@ public final class CopperGolemStatueRenderer implements BlockEntityRenderer<Copp
                 : 0.0F;
 
         poseStack.pushPose();
-        poseStack.translate(0.5D, 1.5D, 0.5D);
-        poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
-        poseStack.scale(-1.0F, -1.0F, 1.0F);
+        // The model spans from Y=-24 to Y=0 model pixels. Anchor Y=0 at
+        // the block floor, flip it upright, and scale it to Copper-Golem size.
+        // This prevents the statue from floating one-and-a-half blocks above
+        // the position, which happened in the previous renderer.
+        poseStack.translate(0.5D, 0.0D, 0.5D);
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - rotation));
+        poseStack.scale(0.82F, -0.82F, -0.82F);
 
         VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURES[stage]));
         model.root().render(poseStack, consumer, packedLight, packedOverlay);
