@@ -1,6 +1,18 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "copper_golem_sorter:item/copper_chest"
+  "parent": "copper_golem_sorter:block/copper_chest_stage_0",
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.78, 0.78, 0.78]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.45, 0.45, 0.45]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "scale": [0.7, 0.7, 0.7]
+    }
   }
 }

@@ -1,6 +1,19 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "copper_golem_sorter:item/copper_golem_statue"
+  "parent": "copper_golem_sorter:block/statue_standing_stage_0",
+  "display": {
+    "gui": {
+      "rotation": [20, 205, 0],
+      "translation": [0, -2.5, 0],
+      "scale": [0.62, 0.62, 0.62]
+    },
+    "ground": {
+      "translation": [0, 2, 0],
+      "scale": [0.35, 0.35, 0.35]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "translation": [0, -1, 0],
+      "scale": [0.55, 0.55, 0.55]
+    }
   }
 }

@@ -143,8 +143,9 @@ public final class CopperGolemEntity extends IronGolem {
         if (!level.getBlockState(pos).canBeReplaced()) pos = pos.above();
 
         if (level.getBlockState(pos).canBeReplaced()) {
-            CopperGolemStatueBlock.StatuePose[] poses = CopperGolemStatueBlock.StatuePose.values();
-            CopperGolemStatueBlock.StatuePose pose = poses[getRandom().nextInt(poses.length)];
+            // Statues always start in the stable standing pose. The player can cycle
+            // poses afterward by interacting with the statue.
+            CopperGolemStatueBlock.StatuePose pose = CopperGolemStatueBlock.StatuePose.STANDING;
             Direction facing = Direction.fromYRot(getYRot());
 
             BlockState statue = ModBlocks.COPPER_GOLEM_STATUE.get().defaultBlockState()
