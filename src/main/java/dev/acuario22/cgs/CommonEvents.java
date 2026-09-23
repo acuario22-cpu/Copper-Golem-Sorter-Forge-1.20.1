@@ -57,7 +57,7 @@ public final class CommonEvents {
     public static void onChestLock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();
         ItemStack held = event.getItemStack();
-        if (!player.isShiftKeyDown() || !held.is(Items.COPPER_NUGGET)) return;
+        if (!player.isShiftKeyDown() || !held.is(Items.COPPER_INGOT)) return;
         if (!(player.level() instanceof ServerLevel level)) return;
 
         BlockEntity be = level.getBlockEntity(event.getPos());
