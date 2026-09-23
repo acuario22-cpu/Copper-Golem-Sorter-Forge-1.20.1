@@ -1,0 +1,19 @@
+package dev.acuario22.cgs.client;
+
+import dev.acuario22.cgs.CopperGolemSorter;
+import dev.acuario22.cgs.client.render.CopperGolemRenderer;
+import dev.acuario22.cgs.registry.ModEntities;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(modid = CopperGolemSorter.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public final class ClientEvents {
+    private ClientEvents() {}
+
+    @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.COPPER_GOLEM.get(), CopperGolemRenderer::new);
+    }
+}
