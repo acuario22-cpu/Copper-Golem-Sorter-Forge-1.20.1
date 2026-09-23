@@ -109,6 +109,12 @@ public final class CopperGolemModel extends HierarchicalModel<CopperGolemEntity>
         head.yRot = netHeadYaw * ((float)Math.PI / 180F);
         head.xRot = headPitch * ((float)Math.PI / 180F);
 
+        // Periodic mechanical head spin, offset by entity id so nearby golems do not synchronize.
+        float spinPhase = (ageInTicks + entity.getId() * 17.0F) % 240.0F;
+        if (spinPhase < 20.0F) {
+            head.yRot += (spinPhase / 20.0F) * Mth.TWO_PI;
+        }
+
         rightLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
         leftLeg.xRot = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.2F * limbSwingAmount;
         rightArm.xRot = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 0.8F * limbSwingAmount;
