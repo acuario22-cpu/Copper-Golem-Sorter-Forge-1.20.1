@@ -9,7 +9,7 @@ Copper Golem Sorter añade un Copper Golem enfocado en organización automática
 - Primero busca un cofre que **ya contenga exactamente el mismo objeto**.
 - Si no existe uno, puede utilizar un **cofre completamente vacío** como nuevo destino.
 - Nunca descarga objetos en otro Copper Chest.
-- **Shift + clic derecho + Copper Nugget** bloquea/desbloquea cualquier contenedor compatible.
+- **Shift + clic derecho + Copper Ingot** bloquea/desbloquea cualquier contenedor compatible.
 - La búsqueda revisa block entities de **chunks ya cargados**: no fuerza generación de chunks.
 
 ## Compatibilidad
