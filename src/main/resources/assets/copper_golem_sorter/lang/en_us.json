@@ -2,7 +2,6 @@
   "block.copper_golem_sorter.copper_chest": "Copper Chest",
   "block.copper_golem_sorter.copper_golem_statue": "Copper Golem Statue",
   "entity.copper_golem_sorter.copper_golem": "Copper Golem",
-  "item.copper_golem_sorter.copper_golem_spawn_egg": "Copper Golem Spawn Egg",
   "container.copper_golem_sorter.copper_chest": "Copper Chest",
   "message.copper_golem_sorter.locked": "Copper Golem sorting disabled for this container.",
   "message.copper_golem_sorter.unlocked": "Copper Golem sorting enabled for this container."

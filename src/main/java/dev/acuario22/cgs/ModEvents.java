@@ -30,8 +30,5 @@ public final class ModEvents {
             event.accept(ModItems.COPPER_CHEST.get());
             event.accept(ModItems.COPPER_GOLEM_STATUE.get());
         }
-        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
-            event.accept(ModItems.COPPER_GOLEM_SPAWN_EGG.get());
-        }
     }
 }
