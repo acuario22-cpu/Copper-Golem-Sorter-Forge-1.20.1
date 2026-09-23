@@ -117,7 +117,9 @@ public final class CopperGolemEntity extends IronGolem {
         if (!level.getBlockState(pos).canBeReplaced()) pos = pos.above();
 
         if (level.getBlockState(pos).canBeReplaced()) {
-            BlockState statue = ModBlocks.COPPER_GOLEM_STATUE.get().defaultBlockState();
+            BlockState statue = ModBlocks.COPPER_GOLEM_STATUE.get().defaultBlockState()
+                    .setValue(net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING,
+                            net.minecraft.core.Direction.fromYRot(getYRot()));
             level.setBlock(pos, statue, 3);
         } else {
             spawnAtLocation(ModBlocks.COPPER_GOLEM_STATUE.get());
@@ -391,6 +393,8 @@ public final class CopperGolemEntity extends IronGolem {
 
             pathTicks++;
             if (pathTicks > CgsConfig.PATH_TIMEOUT_TICKS.get()) {
+                ResourceLocation key = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(carried.getItem());
+                if (key != null) destinationCache.remove(key);
                 destinationPos = null;
                 taskPhase = TaskPhase.FIND_DESTINATION;
                 pathTicks = 0;
