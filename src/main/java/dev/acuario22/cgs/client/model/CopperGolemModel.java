@@ -29,7 +29,6 @@ public final class CopperGolemModel extends HierarchicalModel<CopperGolemEntity>
     private final ModelPart leftArm;
     private final ModelPart rightLeg;
     private final ModelPart leftLeg;
-    private final ModelPart flower;
 
     public CopperGolemModel(ModelPart root) {
         this.root = root;
@@ -39,7 +38,6 @@ public final class CopperGolemModel extends HierarchicalModel<CopperGolemEntity>
         this.leftArm = body.getChild("left_arm");
         this.rightLeg = root.getChild("right_leg");
         this.leftLeg = root.getChild("left_leg");
-        this.flower = head.getChild("flower");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -68,13 +66,6 @@ public final class CopperGolemModel extends HierarchicalModel<CopperGolemEntity>
                 PartPose.offset(0.0F, -6.0F, 0.0F)
         );
 
-        head.addOrReplaceChild(
-                "flower",
-                CubeListBuilder.create()
-                        .texOffs(48, 40)
-                        .addBox(1.0F, -2.0F, -1.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, -5.0F, 0.0F)
-        );
 
         body.addOrReplaceChild(
                 "right_arm",
@@ -149,8 +140,6 @@ public final class CopperGolemModel extends HierarchicalModel<CopperGolemEntity>
             rightArm.yRot = -0.1134464F;
             rightArm.zRot = -0.064577185F;
         }
-
-        flower.visible = entity.hasFlower();
     }
 
     @Override

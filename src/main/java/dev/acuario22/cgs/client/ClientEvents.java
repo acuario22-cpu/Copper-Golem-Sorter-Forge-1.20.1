@@ -4,6 +4,7 @@ import dev.acuario22.cgs.CopperGolemSorter;
 import dev.acuario22.cgs.client.model.CopperGolemModel;
 import dev.acuario22.cgs.client.render.CopperChestRenderer;
 import dev.acuario22.cgs.client.render.CopperGolemRenderer;
+import dev.acuario22.cgs.client.render.CopperGolemStatueRenderer;
 import dev.acuario22.cgs.registry.ModBlockEntities;
 import dev.acuario22.cgs.registry.ModEntities;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,5 +26,6 @@ public final class ClientEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.COPPER_GOLEM.get(), CopperGolemRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.COPPER_CHEST.get(), CopperChestRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.COPPER_GOLEM_STATUE.get(), CopperGolemStatueRenderer::new);
     }
 }
