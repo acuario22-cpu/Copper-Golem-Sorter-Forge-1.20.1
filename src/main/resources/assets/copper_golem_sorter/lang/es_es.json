@@ -1,0 +1,9 @@
+{
+  "block.copper_golem_sorter.copper_chest": "Cofre de cobre",
+  "block.copper_golem_sorter.copper_golem_statue": "Estatua de gólem de cobre",
+  "entity.copper_golem_sorter.copper_golem": "Gólem de cobre",
+  "item.copper_golem_sorter.copper_golem_spawn_egg": "Huevo generador de gólem de cobre",
+  "container.copper_golem_sorter.copper_chest": "Cofre de cobre",
+  "message.copper_golem_sorter.locked": "Clasificación del gólem de cobre desactivada para este contenedor.",
+  "message.copper_golem_sorter.unlocked": "Clasificación del gólem de cobre activada para este contenedor."
+}

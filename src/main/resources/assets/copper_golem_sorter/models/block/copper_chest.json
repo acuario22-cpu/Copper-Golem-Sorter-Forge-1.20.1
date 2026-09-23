@@ -1,0 +1,33 @@
+{
+  "textures": {
+    "copper": "minecraft:block/copper_block",
+    "trim": "minecraft:block/cut_copper",
+    "particle": "minecraft:block/copper_block"
+  },
+  "elements": [
+    {
+      "from": [1,0,1], "to": [15,10,15],
+      "faces": {
+        "north":{"texture":"#copper"},"south":{"texture":"#copper"},
+        "east":{"texture":"#copper"},"west":{"texture":"#copper"},
+        "up":{"texture":"#copper"},"down":{"texture":"#copper"}
+      }
+    },
+    {
+      "from": [1,10,1], "to": [15,15,15],
+      "faces": {
+        "north":{"texture":"#copper"},"south":{"texture":"#copper"},
+        "east":{"texture":"#copper"},"west":{"texture":"#copper"},
+        "up":{"texture":"#trim"},"down":{"texture":"#copper"}
+      }
+    },
+    {
+      "from": [7,8,0.25], "to": [9,12,1],
+      "faces": {
+        "north":{"texture":"#trim"},"south":{"texture":"#trim"},
+        "east":{"texture":"#trim"},"west":{"texture":"#trim"},
+        "up":{"texture":"#trim"},"down":{"texture":"#trim"}
+      }
+    }
+  ]
+}

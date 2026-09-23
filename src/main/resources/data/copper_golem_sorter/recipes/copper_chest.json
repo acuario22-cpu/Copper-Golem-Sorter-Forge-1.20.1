@@ -1,0 +1,9 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern":["CCC","CHC","CCC"],
+  "key":{
+    "C":{"item":"minecraft:copper_ingot"},
+    "H":{"item":"minecraft:chest"}
+  },
+  "result":{"item":"copper_golem_sorter:copper_chest","count":1}
+}
