@@ -16,10 +16,18 @@ public final class CopperChestItem extends BlockItem {
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private final CopperChestItemRenderer renderer = new CopperChestItemRenderer(CopperChestItem.this);
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
 
             @Override
             public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                // Forge can request client item extensions while Minecraft is still
+                // bootstrapping. Constructing the BEWLR eagerly here may access the
+                // block-entity dispatcher/entity models before they exist and crash
+                // the game during "Initializing game". Create it only when the
+                // renderer is actually requested.
+                if (renderer == null) {
+                    renderer = new CopperChestItemRenderer(CopperChestItem.this);
+                }
                 return renderer;
             }
         });
