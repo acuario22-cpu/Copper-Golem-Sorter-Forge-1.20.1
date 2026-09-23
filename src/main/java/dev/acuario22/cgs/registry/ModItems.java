@@ -1,6 +1,7 @@
 package dev.acuario22.cgs.registry;
 
 import dev.acuario22.cgs.CopperGolemSorter;
+import dev.acuario22.cgs.item.CopperChestItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,7 +13,7 @@ public final class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, CopperGolemSorter.MOD_ID);
 
     public static final RegistryObject<Item> COPPER_CHEST = ITEMS.register("copper_chest",
-            () -> new BlockItem(ModBlocks.COPPER_CHEST.get(), new Item.Properties()));
+            () -> new CopperChestItem(ModBlocks.COPPER_CHEST.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> COPPER_GOLEM_STATUE = ITEMS.register("copper_golem_statue",
             () -> new BlockItem(ModBlocks.COPPER_GOLEM_STATUE.get(), new Item.Properties()));
