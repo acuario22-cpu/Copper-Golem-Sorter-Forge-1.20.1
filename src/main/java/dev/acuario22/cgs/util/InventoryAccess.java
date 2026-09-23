@@ -22,7 +22,12 @@ public final class InventoryAccess {
             new ResourceLocation("generations_core", "pokeball_chest"),
             new ResourceLocation("generations_core", "greatball_chest"),
             new ResourceLocation("generations_core", "ultraball_chest"),
-            new ResourceLocation("generations_core", "masterball_chest")
+            new ResourceLocation("generations_core", "masterball_chest"),
+            // Alias kept for customized/older packs that may expose the singular namespace.
+            new ResourceLocation("generation_core", "pokeball_chest"),
+            new ResourceLocation("generation_core", "greatball_chest"),
+            new ResourceLocation("generation_core", "ultraball_chest"),
+            new ResourceLocation("generation_core", "masterball_chest")
     );
 
     private InventoryAccess() {}
@@ -64,8 +69,18 @@ public final class InventoryAccess {
     }
 
     public static boolean isSupported(BlockEntity be) {
-        if (be instanceof Container) return true;
-        return getHandler(be) != null;
+        if (be instanceof CopperChestBlockEntity) return true;
+
+        ResourceLocation id = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getKey(be.getBlockState().getBlock());
+        if (id == null) return false;
+
+        // Keep sorting focused on storage chests instead of furnaces, hoppers or machines
+        // that also expose an item handler.
+        String path = id.getPath();
+        boolean chestLike = path.contains("chest") || isGenerationsChest(be);
+        if (!chestLike) return false;
+
+        return be instanceof Container || getHandler(be) != null;
     }
 
     public static boolean isGenerationsChest(BlockEntity be) {
