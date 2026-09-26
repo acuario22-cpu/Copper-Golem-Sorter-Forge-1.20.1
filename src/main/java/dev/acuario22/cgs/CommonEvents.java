@@ -5,13 +5,13 @@ import dev.acuario22.cgs.block.CopperChestBlock;
 import dev.acuario22.cgs.entity.CopperGolemEntity;
 import dev.acuario22.cgs.registry.ModBlocks;
 import dev.acuario22.cgs.registry.ModEntities;
+import dev.acuario22.cgs.registry.ModSounds;
 import dev.acuario22.cgs.util.InventoryAccess;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -66,7 +66,7 @@ public final class CommonEvents {
         golem.setOxidationStage(variant.stage);
         golem.setWaxed(variant.waxed);
         level.addFreshEntity(golem);
-        level.playSound(null, copperPos, SoundEvents.COPPER_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.playSound(null, copperPos, ModSounds.SPAWN.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
     }
 
     private static BlockPos findSpawn(ServerLevel level, BlockPos chestPos, Direction preferred) {

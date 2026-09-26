@@ -4,5 +4,16 @@
   "entity.copper_golem_sorter.copper_golem": "Gólem de cobre",
   "container.copper_golem_sorter.copper_chest": "Cofre de cobre",
   "message.copper_golem_sorter.locked": "Clasificación del gólem de cobre desactivada para este contenedor.",
-  "message.copper_golem_sorter.unlocked": "Clasificación del gólem de cobre activada para este contenedor."
+  "message.copper_golem_sorter.unlocked": "Clasificación del gólem de cobre activada para este contenedor.",
+  "subtitles.copper_golem_sorter.ambient": "El gólem de cobre zumba",
+  "subtitles.copper_golem_sorter.step": "Pasos del gólem de cobre",
+  "subtitles.copper_golem_sorter.hurt": "El gólem de cobre traquetea",
+  "subtitles.copper_golem_sorter.death": "El gólem de cobre se rompe",
+  "subtitles.copper_golem_sorter.pickup": "El gólem de cobre recoge un objeto",
+  "subtitles.copper_golem_sorter.deposit": "El gólem de cobre deposita un objeto",
+  "subtitles.copper_golem_sorter.work": "El gólem de cobre trabaja",
+  "subtitles.copper_golem_sorter.oxidize": "El gólem de cobre se oxida",
+  "subtitles.copper_golem_sorter.become_statue": "El gólem de cobre se convierte en estatua",
+  "subtitles.copper_golem_sorter.reactivate": "El gólem de cobre se reactiva",
+  "subtitles.copper_golem_sorter.spawn": "El gólem de cobre despierta"
 }

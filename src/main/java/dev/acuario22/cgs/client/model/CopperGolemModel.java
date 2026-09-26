@@ -21,7 +21,6 @@ public final class CopperGolemModel extends HierarchicalModel<CopperGolemEntity>
     public static final ModelLayerLocation LAYER_LOCATION =
             new ModelLayerLocation(new ResourceLocation(CopperGolemSorter.MOD_ID, "copper_golem"), "main");
 
-    private CopperGolemEntity entity;
     private final ModelPart root;
     private final ModelPart body;
     private final ModelPart head;
@@ -110,43 +109,52 @@ public final class CopperGolemModel extends HierarchicalModel<CopperGolemEntity>
     @Override
     public void setupAnim(CopperGolemEntity entity, float limbSwing, float limbSwingAmount,
                           float ageInTicks, float netHeadYaw, float headPitch) {
-        this.entity = entity;
+        CopperGolemEntity.TaskPhase phase = entity.getTaskPhase();
+        float motion = Mth.clamp(limbSwingAmount, 0.0F, 1.0F);
+        float gait = limbSwing * 0.8F;
 
-        head.yRot = netHeadYaw * ((float)Math.PI / 180F);
-        head.xRot = headPitch * ((float)Math.PI / 180F);
+        head.yRot = Mth.clamp(netHeadYaw * ((float) Math.PI / 180F), -0.55F, 0.55F);
+        head.xRot = Mth.clamp(headPitch * ((float) Math.PI / 180F), -0.35F, 0.45F);
+        body.xRot = 0.0F;
+        body.y = -5.0F + Mth.sin(ageInTicks * 0.11F) * (motion < 0.05F ? 0.12F : 0.04F);
 
-        float spinPhase = (ageInTicks + entity.getId() * 17.0F) % 240.0F;
-        if (spinPhase < 20.0F) {
-            head.yRot += (spinPhase / 20.0F) * Mth.TWO_PI;
-        }
-
-        rightLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.05F * limbSwingAmount;
-        leftLeg.xRot = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.05F * limbSwingAmount;
+        rightLeg.xRot = Mth.cos(gait) * 0.75F * motion;
+        leftLeg.xRot = Mth.cos(gait + (float) Math.PI) * 0.75F * motion;
         rightLeg.yRot = 0.0F;
         leftLeg.yRot = 0.0F;
         rightLeg.zRot = 0.0F;
         leftLeg.zRot = 0.0F;
 
-        rightArm.xRot = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 0.75F * limbSwingAmount;
-        leftArm.xRot = Mth.cos(limbSwing * 0.6662F) * 0.75F * limbSwingAmount;
+        rightArm.xRot = Mth.cos(gait + (float) Math.PI) * 0.38F * motion;
+        leftArm.xRot = Mth.cos(gait) * 0.38F * motion;
         rightArm.yRot = 0.0F;
         leftArm.yRot = 0.0F;
         rightArm.zRot = 0.0F;
         leftArm.zRot = 0.0F;
 
-        if (!entity.getMainHandItem().isEmpty()) {
-            // Modern Copper Golem carrying pose: bring the arm forward and slightly inward.
-            rightArm.xRot = Math.min(rightArm.xRot, -0.87266463F);
-            rightArm.yRot = -0.1134464F;
-            rightArm.zRot = -0.064577185F;
+        if (phase == CopperGolemEntity.TaskPhase.PICKUP) {
+            body.xRot = 0.10F;
+            head.xRot = 0.30F;
+            rightArm.xRot = -0.55F;
+            leftArm.xRot = -0.20F;
+        } else if (phase == CopperGolemEntity.TaskPhase.DEPOSIT) {
+            body.xRot = 0.07F;
+            head.xRot = 0.18F;
+            rightArm.xRot = -1.05F;
+        } else if (!entity.getMainHandItem().isEmpty()) {
+            // Keep the carried stack ahead of the small body while the other arm walks.
+            rightArm.xRot = -0.95F + Mth.sin(gait) * 0.05F * motion;
+            rightArm.yRot = -0.10F;
+            rightArm.zRot = -0.04F;
+        } else if (motion < 0.05F) {
+            rightArm.xRot = Mth.sin(ageInTicks * 0.09F) * 0.04F;
+            leftArm.xRot = -rightArm.xRot;
         }
     }
 
     @Override
     public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
-        // The arm is nested under body, so all parent transforms must be applied.
-        // The scale/offset mirrors the modern Copper Golem carry transform and keeps
-        // the rendered stack close to the hand instead of floating a block away.
+        // Include the body pivot before the arm so the item follows the work pose.
         root.translateAndRotate(poseStack);
         body.translateAndRotate(poseStack);
 

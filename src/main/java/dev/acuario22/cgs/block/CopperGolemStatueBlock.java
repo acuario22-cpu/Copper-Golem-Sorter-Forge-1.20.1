@@ -4,6 +4,7 @@ import dev.acuario22.cgs.util.CopperWeathering;
 import dev.acuario22.cgs.block.entity.CopperGolemStatueBlockEntity;
 import dev.acuario22.cgs.entity.CopperGolemEntity;
 import dev.acuario22.cgs.registry.ModEntities;
+import dev.acuario22.cgs.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -137,7 +138,7 @@ public final class CopperGolemStatueBlock extends BaseEntityBlock {
                         golem.setCustomName(statueBe.getCustomName());
                     }
                     serverLevel.addFreshEntity(golem);
-                    serverLevel.playSound(null, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    serverLevel.playSound(null, pos, ModSounds.REACTIVATE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                     damageAxe(player, hand, held);
                 }
                 return InteractionResult.SUCCESS;

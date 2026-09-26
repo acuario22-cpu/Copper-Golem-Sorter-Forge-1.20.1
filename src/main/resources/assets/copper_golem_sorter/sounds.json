@@ -1,0 +1,53 @@
+{
+  "entity.copper_golem.ambient": {
+    "subtitle": "subtitles.copper_golem_sorter.ambient",
+    "sounds": [
+      { "name": "minecraft:block/copper/step1", "volume": 0.25, "pitch": 1.35 },
+      { "name": "minecraft:block/copper/step3", "volume": 0.25, "pitch": 1.35 }
+    ]
+  },
+  "entity.copper_golem.step": {
+    "subtitle": "subtitles.copper_golem_sorter.step",
+    "sounds": [
+      "minecraft:block/copper/step1", "minecraft:block/copper/step2",
+      "minecraft:block/copper/step3", "minecraft:block/copper/step4",
+      "minecraft:block/copper/step5", "minecraft:block/copper/step6"
+    ]
+  },
+  "entity.copper_golem.hurt": {
+    "subtitle": "subtitles.copper_golem_sorter.hurt",
+    "sounds": ["minecraft:block/copper/break1", "minecraft:block/copper/break2"]
+  },
+  "entity.copper_golem.death": {
+    "subtitle": "subtitles.copper_golem_sorter.death",
+    "sounds": ["minecraft:block/copper/break3", "minecraft:block/copper/break4"]
+  },
+  "entity.copper_golem.pickup": {
+    "subtitle": "subtitles.copper_golem_sorter.pickup",
+    "sounds": [{ "name": "minecraft:random/pop", "pitch": 0.85 }]
+  },
+  "entity.copper_golem.deposit": {
+    "subtitle": "subtitles.copper_golem_sorter.deposit",
+    "sounds": [{ "name": "minecraft:block/copper/step2", "pitch": 0.8 }]
+  },
+  "entity.copper_golem.work": {
+    "subtitle": "subtitles.copper_golem_sorter.work",
+    "sounds": [{ "name": "minecraft:tile/piston/in", "volume": 0.35, "pitch": 1.5 }]
+  },
+  "entity.copper_golem.oxidize": {
+    "subtitle": "subtitles.copper_golem_sorter.oxidize",
+    "sounds": [{ "name": "minecraft:block/copper/step5", "pitch": 0.75 }]
+  },
+  "entity.copper_golem.become_statue": {
+    "subtitle": "subtitles.copper_golem_sorter.become_statue",
+    "sounds": [{ "name": "minecraft:block/copper/break4", "pitch": 0.7 }]
+  },
+  "entity.copper_golem.reactivate": {
+    "subtitle": "subtitles.copper_golem_sorter.reactivate",
+    "sounds": [{ "name": "minecraft:tile/piston/out", "volume": 0.5, "pitch": 1.45 }]
+  },
+  "entity.copper_golem.spawn": {
+    "subtitle": "subtitles.copper_golem_sorter.spawn",
+    "sounds": [{ "name": "minecraft:block/copper/step4", "pitch": 0.8 }]
+  }
+}
