@@ -1,7 +1,7 @@
 name: Build Copper Golem Sorter
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feature/copper-golem-1.3.0" ]
   workflow_dispatch:
 permissions:
   contents: read

@@ -4,6 +4,7 @@ import dev.acuario22.cgs.registry.ModBlockEntities;
 import dev.acuario22.cgs.registry.ModBlocks;
 import dev.acuario22.cgs.registry.ModEntities;
 import dev.acuario22.cgs.registry.ModItems;
+import dev.acuario22.cgs.registry.ModSounds;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +20,7 @@ public final class CopperGolemSorter {
         ModBlocks.BLOCKS.register(modBus);
         ModItems.ITEMS.register(modBus);
         ModEntities.ENTITIES.register(modBus);
+        ModSounds.SOUNDS.register(modBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CgsConfig.SPEC);
     }

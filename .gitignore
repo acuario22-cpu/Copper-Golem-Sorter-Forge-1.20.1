@@ -1,6 +1,8 @@
 .gradle/
+.gradle-home/
 build/
 run/
+run-production/
 out/
 .idea/
 *.iml

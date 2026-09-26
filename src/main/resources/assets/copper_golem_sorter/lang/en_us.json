@@ -4,5 +4,16 @@
   "entity.copper_golem_sorter.copper_golem": "Copper Golem",
   "container.copper_golem_sorter.copper_chest": "Copper Chest",
   "message.copper_golem_sorter.locked": "Copper Golem sorting disabled for this container.",
-  "message.copper_golem_sorter.unlocked": "Copper Golem sorting enabled for this container."
+  "message.copper_golem_sorter.unlocked": "Copper Golem sorting enabled for this container.",
+  "subtitles.copper_golem_sorter.ambient": "Copper Golem whirs",
+  "subtitles.copper_golem_sorter.step": "Copper Golem steps",
+  "subtitles.copper_golem_sorter.hurt": "Copper Golem rattles",
+  "subtitles.copper_golem_sorter.death": "Copper Golem breaks",
+  "subtitles.copper_golem_sorter.pickup": "Copper Golem picks up an item",
+  "subtitles.copper_golem_sorter.deposit": "Copper Golem deposits an item",
+  "subtitles.copper_golem_sorter.work": "Copper Golem works",
+  "subtitles.copper_golem_sorter.oxidize": "Copper Golem oxidizes",
+  "subtitles.copper_golem_sorter.become_statue": "Copper Golem becomes a statue",
+  "subtitles.copper_golem_sorter.reactivate": "Copper Golem reactivates",
+  "subtitles.copper_golem_sorter.spawn": "Copper Golem awakens"
 }
